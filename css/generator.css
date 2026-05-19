@@ -1,0 +1,210 @@
+.generator {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 80px 24px 120px;
+  text-align: center;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(48px, 7vw, 84px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin: 80px 0 56px;
+}
+
+.prompt-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  padding: 22px 22px 16px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.prompt-card__input {
+  appearance: none;
+  border: 0;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  resize: none;
+  font-size: 15px;
+  color: var(--fg);
+  line-height: 1.45;
+  padding: 4px 6px;
+}
+
+.prompt-card__input::placeholder {
+  color: var(--fg-muted);
+}
+
+.prompt-card__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.prompt-card__row--more {
+  border-top: 1px solid var(--divider);
+  padding-top: 14px;
+}
+
+.prompt-card__row--more[hidden] { display: none; }
+
+.prompt-card__spacer { flex: 1; }
+
+.more-options {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--fg);
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+}
+
+.more-options:hover { background: var(--pill-bg); }
+
+.more-options svg {
+  width: 10px;
+  height: 6px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  transition: transform 0.18s ease;
+}
+
+.more-options[aria-expanded="false"] svg { transform: rotate(180deg); }
+
+.submit-btn {
+  appearance: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--pill-border);
+  background: var(--card-bg);
+  color: var(--fg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: var(--accent);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: progress;
+}
+
+.submit-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.prompt-card__error {
+  margin: 0;
+  font-size: 13px;
+  color: var(--error);
+  padding: 0 6px;
+}
+
+/* ---------- Results ---------- */
+
+.results {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.result {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--card-shadow);
+}
+
+.result__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--pill-bg);
+}
+
+.result__actions {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--divider);
+}
+
+.result__btn {
+  flex: 1;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: var(--fg);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+.result__btn:hover { background: var(--pill-bg); }
+
+.result__btn--copied { color: var(--fg-muted); }
+
+.result--skeleton {
+  aspect-ratio: 1 / 1;
+  background: var(--pill-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.result--skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  animation: shimmer 1.4s linear infinite;
+}
+
+html[data-theme="dark"] .result--skeleton::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+@media (max-width: 640px) {
+  .hero-title { margin: 40px 0 32px; }
+  .generator { padding: 40px 16px 80px; }
+  .prompt-card__row { gap: 8px; }
+  .results { grid-template-columns: 1fr; }
+}

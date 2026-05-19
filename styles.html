@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Image Maker · Styles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/styles-page.css" />
+    <script src="js/theme.js" defer></script>
+    <script src="js/styles-store.js" defer></script>
+    <script src="js/styles-page.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__left">
+        <a href="index.html" class="brand">PIM</a>
+        <nav class="tabs">
+          <a href="index.html" class="tab">Generator</a>
+          <a href="styles.html" class="tab tab--active">Styles</a>
+        </nav>
+      </div>
+      <div class="site-header__right">
+        <label class="theme-toggle">
+          <span>Dark mode</span>
+          <input type="checkbox" id="themeToggle" />
+          <span class="theme-toggle__track"><span class="theme-toggle__thumb"></span></span>
+        </label>
+      </div>
+    </header>
+
+    <main class="styles-page">
+      <div class="styles-page__head">
+        <div>
+          <h1 class="page-title">Styles</h1>
+          <p class="page-subtitle">Preset prompt suffixes you can pick from on the Generator.</p>
+        </div>
+        <div class="styles-page__actions">
+          <button type="button" class="btn btn--ghost" id="exportBtn">Export styles.json</button>
+          <button type="button" class="btn btn--ghost" id="resetBtn">Reset to defaults</button>
+          <button type="button" class="btn btn--primary" id="newStyleBtn">+ New style</button>
+        </div>
+      </div>
+
+      <ul class="style-grid" id="styleGrid"></ul>
+    </main>
+
+    <div class="modal" id="styleModal" hidden>
+      <div class="modal__overlay" id="modalOverlay"></div>
+      <form class="modal__panel" id="styleForm" autocomplete="off">
+        <h2 id="modalTitle">New style</h2>
+        <label class="field">
+          <span>Name</span>
+          <input type="text" id="styleName" required maxlength="60" />
+        </label>
+        <label class="field">
+          <span>Prompt suffix</span>
+          <textarea
+            id="stylePromptSuffix"
+            rows="3"
+            placeholder=", in a watercolor style with soft edges"
+            required
+          ></textarea>
+          <small>Appended to the user's prompt when this style is selected.</small>
+        </label>
+        <label class="field">
+          <span>Description (optional)</span>
+          <input type="text" id="styleDescription" maxlength="200" />
+        </label>
+        <div class="modal__actions">
+          <button type="button" class="btn btn--ghost" id="cancelStyleBtn">Cancel</button>
+          <button type="submit" class="btn btn--primary" id="saveStyleBtn">Save</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

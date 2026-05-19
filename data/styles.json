@@ -1,0 +1,40 @@
+{
+  "styles": [
+    {
+      "id": "illustration",
+      "name": "Illustration",
+      "description": "Clean modern editorial illustration.",
+      "promptSuffix": ", as a clean modern editorial illustration with flat colors, simple shapes, and confident linework on an off-white background"
+    },
+    {
+      "id": "watercolor",
+      "name": "Watercolor",
+      "description": "Loose hand-painted watercolor.",
+      "promptSuffix": ", as a loose hand-painted watercolor with soft edges, gentle color bleeds, and visible paper texture"
+    },
+    {
+      "id": "line-drawing",
+      "name": "Line drawing",
+      "description": "Minimal single-weight ink line art.",
+      "promptSuffix": ", as a minimal single-weight black ink line drawing on plain white paper, no shading, generous negative space"
+    },
+    {
+      "id": "photographic",
+      "name": "Photographic",
+      "description": "Realistic studio photography.",
+      "promptSuffix": ", photographed in soft natural light with a 50mm lens, shallow depth of field, realistic textures, neutral color grade"
+    },
+    {
+      "id": "risograph",
+      "name": "Risograph",
+      "description": "Two-color riso print look.",
+      "promptSuffix": ", printed as a two-color risograph with slight registration misalignment, halftone grain, and limited palette of warm red and navy on cream paper"
+    },
+    {
+      "id": "3d-render",
+      "name": "3D render",
+      "description": "Clay-style 3D render.",
+      "promptSuffix": ", as a clay-style 3D render with soft global illumination, matte surfaces, pastel palette, and gentle ambient occlusion"
+    }
+  ]
+}

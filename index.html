@@ -3,14 +3,104 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>personal image maker</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Personal Image Maker · Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/generator.css" />
+    <script src="js/theme.js" defer></script>
+    <script src="js/config.js" defer></script>
+    <script src="js/image-gen.js" defer></script>
+    <script src="js/styles-store.js" defer></script>
+    <script src="js/generator.js" defer></script>
   </head>
   <body>
-    <main>
-      <h1>personal image maker</h1>
-      <p class="tagline">a small lab for making images.</p>
+    <header class="site-header">
+      <div class="site-header__left">
+        <a href="index.html" class="brand">PIM</a>
+        <nav class="tabs">
+          <a href="index.html" class="tab tab--active">Generator</a>
+          <a href="styles.html" class="tab">Styles</a>
+        </nav>
+      </div>
+      <div class="site-header__right">
+        <label class="theme-toggle">
+          <span>Dark mode</span>
+          <input type="checkbox" id="themeToggle" />
+          <span class="theme-toggle__track"><span class="theme-toggle__thumb"></span></span>
+        </label>
+      </div>
+    </header>
+
+    <main class="generator">
+      <h1 class="hero-title">Image Generator</h1>
+
+      <form class="prompt-card" id="generateForm" autocomplete="off">
+        <textarea
+          id="promptInput"
+          class="prompt-card__input"
+          placeholder="What do you want to draw today?"
+          rows="2"
+          required
+        ></textarea>
+
+        <div class="prompt-card__row prompt-card__row--primary">
+          <label class="select-pill">
+            <span class="select-pill__label">Style</span>
+            <select id="styleSelect"></select>
+          </label>
+          <button
+            type="button"
+            class="more-options"
+            id="moreOptionsToggle"
+            aria-expanded="true"
+            aria-controls="moreOptions"
+          >
+            More options
+            <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1 L5 5 L9 1" /></svg>
+          </button>
+        </div>
+
+        <div class="prompt-card__row prompt-card__row--more" id="moreOptions">
+          <label class="select-pill">
+            <span class="select-pill__label">Aspect ratio</span>
+            <select id="aspectSelect">
+              <option value="1024x1024">Square (1:1)</option>
+              <option value="1536x1024">Landscape (3:2)</option>
+              <option value="1024x1536">Portrait (2:3)</option>
+            </select>
+          </label>
+          <label class="select-pill">
+            <span class="select-pill__label">Number of images</span>
+            <select id="countSelect">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </label>
+          <label class="select-pill">
+            <span class="select-pill__label">Model</span>
+            <select id="modelSelect">
+              <option value="gpt-image-1.5">gpt-image-1.5</option>
+            </select>
+          </label>
+
+          <div class="prompt-card__spacer"></div>
+
+          <button type="submit" class="submit-btn" id="submitBtn" aria-label="Generate">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8 H13 M8 3 L13 8 L8 13" /></svg>
+          </button>
+        </div>
+
+        <p class="prompt-card__error" id="errorBanner" hidden></p>
+      </form>
+
+      <section class="results" id="results" aria-live="polite"></section>
     </main>
-    <script src="script.js"></script>
   </body>
 </html>

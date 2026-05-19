@@ -1,0 +1,211 @@
+:root {
+  --bg: #f5efe7;
+  --fg: #1a1a1a;
+  --fg-muted: #6b6b6b;
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.06);
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  --pill-bg: #f0ebe2;
+  --pill-border: rgba(0, 0, 0, 0.08);
+  --pill-fg: #3a3a3a;
+  --accent: #1a1a1a;
+  --accent-fg: #ffffff;
+  --divider: rgba(0, 0, 0, 0.08);
+  --error: #b3261e;
+  --serif: "Libre Caslon Text", "Libre Caslon", "Big Caslon", "Hoefler Text", ui-serif, Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --radius-card: 18px;
+  --radius-pill: 999px;
+}
+
+html[data-theme="dark"] {
+  --bg: #15130f;
+  --fg: #f4ecdf;
+  --fg-muted: #9c948a;
+  --card-bg: #221f1a;
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --pill-bg: #2b2722;
+  --pill-border: rgba(255, 255, 255, 0.08);
+  --pill-fg: #d9d0c2;
+  --accent: #f4ecdf;
+  --accent-fg: #15130f;
+  --divider: rgba(255, 255, 255, 0.08);
+  --error: #f2b8b5;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.45;
+  min-height: 100vh;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a { color: inherit; }
+
+/* ---------- Header ---------- */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.site-header__left,
+.site-header__right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.brand {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.tabs {
+  display: flex;
+  gap: 22px;
+}
+
+.tab {
+  text-decoration: none;
+  color: var(--fg);
+  padding: 4px 0;
+  font-size: 14px;
+}
+
+.tab--active {
+  border-bottom: 1px solid var(--fg);
+}
+
+/* Dark mode toggle */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.theme-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.theme-toggle__track {
+  position: relative;
+  width: 34px;
+  height: 20px;
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  border-radius: var(--radius-pill);
+  transition: background-color 0.18s ease;
+}
+
+.theme-toggle__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--fg);
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+.theme-toggle input:checked ~ .theme-toggle__track .theme-toggle__thumb {
+  transform: translateX(14px);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--pill-border);
+  background: var(--card-bg);
+  color: var(--fg);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
+}
+
+.btn:hover { background: var(--pill-bg); }
+.btn:active { transform: translateY(1px); }
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: var(--accent);
+}
+
+.btn--ghost {
+  background: transparent;
+}
+
+/* Select pill (shared between pages) */
+
+.select-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  border-radius: var(--radius-pill);
+  padding: 7px 32px 7px 14px;
+  font-size: 13px;
+  color: var(--pill-fg);
+  cursor: pointer;
+}
+
+.select-pill::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid var(--pill-fg);
+  border-bottom: 1.5px solid var(--pill-fg);
+  transform: rotate(45deg) translateY(-2px);
+  pointer-events: none;
+}
+
+.select-pill__label {
+  display: none;
+}
+
+.select-pill select {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 13px;
+  color: var(--pill-fg);
+  cursor: pointer;
+  min-width: 0;
+}
+
+.select-pill select:focus { outline: none; }
