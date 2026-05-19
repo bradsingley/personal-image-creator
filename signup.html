@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create account · Personal Image Creator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+    <script src="js/theme.js" defer></script>
+    <script src="js/config.js" defer></script>
+    <script src="js/auth.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__left">
+        <a href="index.html" class="brand">PIC</a>
+      </div>
+      <div class="site-header__right">
+        <label class="theme-toggle">
+          <span>Dark mode</span>
+          <input type="checkbox" id="themeToggle" />
+          <span class="theme-toggle__track"><span class="theme-toggle__thumb"></span></span>
+        </label>
+      </div>
+    </header>
+
+    <main class="auth-page">
+      <div class="auth-card">
+        <h1 class="auth-title">Create your account.</h1>
+        <form id="signupForm" class="auth-form" autocomplete="on">
+          <label class="field">
+            <span>Name</span>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="Your name" />
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input type="password" id="password" name="password" required minlength="8" autocomplete="new-password" placeholder="At least 8 characters" />
+          </label>
+          <p class="form-error" id="formError" hidden></p>
+          <button type="submit" class="btn btn--primary btn--full" id="submitBtn">Create account</button>
+        </form>
+        <p class="auth-card__footer">
+          Already have an account? <a href="login.html" id="loginLink">Sign in</a>
+        </p>
+      </div>
+    </main>
+
+    <script>
+      function nextUrl() {
+        const params = new URLSearchParams(location.search);
+        const raw = params.get('next');
+        if (!raw) return 'index.html';
+        try {
+          const decoded = decodeURIComponent(raw);
+          if (decoded.startsWith('/') || decoded.endsWith('.html')) return decoded;
+          return 'index.html';
+        } catch {
+          return 'index.html';
+        }
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+        const link = document.getElementById('loginLink');
+        link.href = `login.html?next=${encodeURIComponent(nextUrl())}`;
+
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const name = document.getElementById('name').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const password = document.getElementById('password').value;
+          const errorEl = document.getElementById('formError');
+          const submitBtn = document.getElementById('submitBtn');
+
+          errorEl.hidden = true;
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Creating…';
+
+          const { error } = await signUp(email, password, name);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Create account';
+
+          if (error) {
+            errorEl.textContent = error.message || 'Sign-up failed.';
+            errorEl.hidden = false;
+          } else {
+            location.replace(nextUrl());
+          }
+        });
+
+        (async () => {
+          const user = await getCurrentUser();
+          if (user) location.replace(nextUrl());
+        })();
+      });
+    </script>
+  </body>
+</html>

@@ -1,8 +1,8 @@
 /**
- * Wrapper around the lab-api /personal-image-maker/generate-image endpoint.
+ * Wrapper around the lab-api /personal-image-creator/generate-image endpoint.
  */
 async function generateImages({ prompt, size, n, model }) {
-    const { data, error } = await api('/personal-image-maker/generate-image', {
+    const { data, error } = await api('/personal-image-creator/generate-image', {
         method: 'POST',
         body: {
             prompt,

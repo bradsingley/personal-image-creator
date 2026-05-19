@@ -1,15 +1,16 @@
-# personal-image-maker
+# personal-image-creator
 
-A small lab project for generating images with managed preset styles. Loosely inspired by the MAI image generator UI.
+Personal Image Creator (PIC) — a small lab project for generating images with managed preset styles. Loosely inspired by the MAI image generator UI.
 
 ## Pages
 - `index.html` — Generator: prompt + style + aspect ratio + count + model.
 - `styles.html` — Styles manager: add / edit / delete preset prompt suffixes.
+- `login.html` / `signup.html` — better-auth sign-in / account creation, scoped to `.bradsingley.com` (same session as other lab apps).
 
 ## Backend
-Calls `POST https://api.bradsingley.com/personal-image-maker/generate-image` (lab-api). Cookie-auth via better-auth on `.bradsingley.com` — sign in to any sister lab app first (e.g. mudbord).
+Calls `POST https://api.bradsingley.com/personal-image-creator/generate-image` (lab-api). Cookie-auth via better-auth on `.bradsingley.com`.
 
-The lab-api route is defined in `lab-api/src/routes/personal-image-maker.ts` and proxies Azure OpenAI `gpt-image-1.5`.
+The lab-api route is defined in `lab-api/src/routes/personal-image-creator.ts` and proxies Azure OpenAI `gpt-image-1.5`.
 
 ## Styles
 - Seed presets live in `data/styles.json` and are committed to the repo.

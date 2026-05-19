@@ -1,5 +1,5 @@
 (function () {
-    const KEY = 'pim.theme';
+    const KEY = 'pic.theme';
 
     function apply(theme) {
         document.documentElement.setAttribute('data-theme', theme);

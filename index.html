@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Personal Image Maker · Generator</title>
+    <title>Personal Image Creator · Generator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/generator.css" />
     <script src="js/theme.js" defer></script>
     <script src="js/config.js" defer></script>
+    <script src="js/auth.js" defer></script>
     <script src="js/image-gen.js" defer></script>
     <script src="js/styles-store.js" defer></script>
     <script src="js/generator.js" defer></script>
@@ -21,13 +22,14 @@
   <body>
     <header class="site-header">
       <div class="site-header__left">
-        <a href="index.html" class="brand">PIM</a>
+        <a href="index.html" class="brand">PIC</a>
         <nav class="tabs">
           <a href="index.html" class="tab tab--active">Generator</a>
           <a href="styles.html" class="tab">Styles</a>
         </nav>
       </div>
       <div class="site-header__right">
+        <div class="user-badge" id="userBadge" hidden></div>
         <label class="theme-toggle">
           <span>Dark mode</span>
           <input type="checkbox" id="themeToggle" />

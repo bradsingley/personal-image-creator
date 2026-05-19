@@ -5,8 +5,8 @@
  */
 
 const StylesStore = (() => {
-    const OVERRIDES_KEY = 'pim.styleOverrides';
-    const DELETED_KEY = 'pim.styleDeleted';
+    const OVERRIDES_KEY = 'pic.styleOverrides';
+    const DELETED_KEY = 'pic.styleDeleted';
     const SEED_URL = 'data/styles.json';
 
     let seed = null;
@@ -33,7 +33,7 @@ const StylesStore = (() => {
     }
 
     function notify() {
-        document.dispatchEvent(new CustomEvent('pim:styles-changed'));
+        document.dispatchEvent(new CustomEvent('pic:styles-changed'));
     }
 
     async function ensureLoaded() {

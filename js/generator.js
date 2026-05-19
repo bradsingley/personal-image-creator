@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    const user = await requirePageAuth();
+    if (!user) return; // redirecting to login
+
     const form = document.getElementById('generateForm');
     const promptInput = document.getElementById('promptInput');
     const styleSelect = document.getElementById('styleSelect');
@@ -37,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (currentValue) styleSelect.value = currentValue;
     }
     await refreshStyles();
-    document.addEventListener('pim:styles-changed', refreshStyles);
+    document.addEventListener('pic:styles-changed', refreshStyles);
 
     // Cmd/Ctrl+Enter submits
     promptInput.addEventListener('keydown', (e) => {
@@ -86,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             downloadBtn.addEventListener('click', () => {
                 const a = document.createElement('a');
                 a.href = img.src;
-                a.download = `pim-${Date.now()}-${i + 1}.png`;
+                a.download = `pic-${Date.now()}-${i + 1}.png`;
                 a.click();
             });
 
@@ -146,7 +149,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (error) {
             results.innerHTML = '';
             if (error.status === 401) {
-                setError('You need to sign in to lab-api before generating. Visit lab.bradsingley.com/mudbord and log in, then come back.');
+                setError('Your session expired. Redirecting to sign-in…');
+                setTimeout(() => location.replace('login.html'), 1200);
             } else {
                 setError(error.message || 'Generation failed.');
             }

@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    const user = await requirePageAuth();
+    if (!user) return;
+
     await StylesStore.ensureLoaded();
 
     const grid = document.getElementById('styleGrid');
@@ -103,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     render();
-    document.addEventListener('pim:styles-changed', render);
+    document.addEventListener('pic:styles-changed', render);
 
     newBtn.addEventListener('click', () => openModal(null));
     cancelBtn.addEventListener('click', closeModal);
