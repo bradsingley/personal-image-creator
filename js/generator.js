@@ -21,20 +21,50 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     uploadBtn.addEventListener('click', () => refInput.click());
 
-    refInput.addEventListener('change', () => {
-        for (const file of Array.from(refInput.files || [])) {
+    // Add files from the upload button or a clipboard paste, applying the
+    // model/size/count limits. Returns how many were actually added.
+    function addReferenceFiles(files) {
+        if (!modelSupportsReferences(modelSelect.value)) {
+            setError('Reference images only work with the gpt-image models. Switch the model first.');
+            return 0;
+        }
+        let added = 0;
+        for (const file of files) {
             if (referenceFiles.length >= MAX_REFS) {
                 setError(`You can attach up to ${MAX_REFS} reference images.`);
                 break;
             }
             if (file.size > MAX_REF_BYTES) {
-                setError(`"${file.name}" is too large (max 10MB).`);
+                setError(`"${file.name || 'image'}" is too large (max 10MB).`);
                 continue;
             }
             referenceFiles.push(file);
+            added++;
         }
+        if (added) renderRefPreviews();
+        return added;
+    }
+
+    refInput.addEventListener('change', () => {
+        addReferenceFiles(Array.from(refInput.files || []));
         refInput.value = '';
-        renderRefPreviews();
+    });
+
+    // Paste an image anywhere in the composer to attach it as a reference.
+    document.addEventListener('paste', (e) => {
+        const items = e.clipboardData && e.clipboardData.items;
+        if (!items) return;
+        const files = [];
+        for (const item of items) {
+            if (item.kind === 'file' && item.type.startsWith('image/')) {
+                const file = item.getAsFile();
+                if (file) files.push(file);
+            }
+        }
+        if (files.length) {
+            e.preventDefault();
+            addReferenceFiles(files);
+        }
     });
 
     function renderRefPreviews() {
