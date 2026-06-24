@@ -8,17 +8,20 @@
 const PIC_TERMINAL = new Set(['succeeded', 'failed']);
 
 /** Create a generation job. Returns { job, error }. */
-async function createGenerationJob({ prompt, size, n, model }) {
+async function createGenerationJob({ prompt, size, model, referenceImages }) {
+    const body = {
+        prompt,
+        size,
+        model,
+        quality: 'high',
+        output_format: 'png',
+    };
+    if (referenceImages && referenceImages.length) {
+        body.referenceImages = referenceImages;
+    }
     const { data, error } = await api('/personal-image-creator/jobs', {
         method: 'POST',
-        body: {
-            prompt,
-            size,
-            n,
-            model,
-            quality: 'high',
-            output_format: 'png',
-        },
+        body,
     });
     if (error) return { job: null, error };
     return { job: data?.job ?? null, error: null };

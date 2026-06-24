@@ -6,20 +6,92 @@ document.addEventListener('DOMContentLoaded', async () => {
     const promptInput = document.getElementById('promptInput');
     const styleSelect = document.getElementById('styleSelect');
     const aspectSelect = document.getElementById('aspectSelect');
-    const countSelect = document.getElementById('countSelect');
     const modelSelect = document.getElementById('modelSelect');
     const submitBtn = document.getElementById('submitBtn');
     const errorBanner = document.getElementById('errorBanner');
     const results = document.getElementById('results');
-    const moreOptionsToggle = document.getElementById('moreOptionsToggle');
-    const moreOptionsRow = document.getElementById('moreOptions');
+    const refInput = document.getElementById('refInput');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const refPreviews = document.getElementById('refPreviews');
 
-    // More options expand/collapse
-    moreOptionsToggle.addEventListener('click', () => {
-        const expanded = moreOptionsToggle.getAttribute('aria-expanded') === 'true';
-        moreOptionsToggle.setAttribute('aria-expanded', String(!expanded));
-        moreOptionsRow.hidden = expanded;
+    // ----- Reference images (image-to-image) -----
+    const MAX_REFS = 4;
+    const MAX_REF_BYTES = 10 * 1024 * 1024; // 10MB
+    const referenceFiles = [];
+
+    uploadBtn.addEventListener('click', () => refInput.click());
+
+    refInput.addEventListener('change', () => {
+        for (const file of Array.from(refInput.files || [])) {
+            if (referenceFiles.length >= MAX_REFS) {
+                setError(`You can attach up to ${MAX_REFS} reference images.`);
+                break;
+            }
+            if (file.size > MAX_REF_BYTES) {
+                setError(`"${file.name}" is too large (max 10MB).`);
+                continue;
+            }
+            referenceFiles.push(file);
+        }
+        refInput.value = '';
+        renderRefPreviews();
     });
+
+    function renderRefPreviews() {
+        refPreviews.innerHTML = '';
+        referenceFiles.forEach((file, i) => {
+            const item = document.createElement('div');
+            item.className = 'prompt-ref';
+            const img = document.createElement('img');
+            img.alt = file.name;
+            img.src = URL.createObjectURL(file);
+            img.onload = () => URL.revokeObjectURL(img.src);
+            const remove = document.createElement('button');
+            remove.type = 'button';
+            remove.className = 'prompt-ref__remove';
+            remove.setAttribute('aria-label', `Remove ${file.name}`);
+            remove.textContent = '\u00d7';
+            remove.addEventListener('click', () => {
+                referenceFiles.splice(i, 1);
+                renderRefPreviews();
+            });
+            item.appendChild(img);
+            item.appendChild(remove);
+            refPreviews.appendChild(item);
+        });
+        refPreviews.hidden = referenceFiles.length === 0;
+    }
+
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const result = String(reader.result);
+                resolve(result.slice(result.indexOf(',') + 1));
+            };
+            reader.onerror = () => reject(reader.error);
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // Only the gpt-image models support reference images, so the upload button
+    // only appears for them. Switching to an unsupported model clears any
+    // images already attached.
+    function modelSupportsReferences(model) {
+        return model.startsWith('gpt-image');
+    }
+
+    function updateRefAvailability() {
+        const supported = modelSupportsReferences(modelSelect.value);
+        uploadBtn.hidden = !supported;
+        if (!supported && referenceFiles.length) {
+            referenceFiles.length = 0;
+            renderRefPreviews();
+        }
+    }
+
+    modelSelect.addEventListener('change', updateRefAvailability);
+    updateRefAvailability();
 
     // Populate style dropdown
     async function refreshStyles() {
@@ -144,13 +216,32 @@ document.addEventListener('DOMContentLoaded', async () => {
             : userPrompt;
 
         const size = aspectSelect.value;
-        const n = parseInt(countSelect.value, 10);
         const model = modelSelect.value;
 
-        submitBtn.disabled = true;
-        renderSkeletons(n);
+        if (referenceFiles.length > 0 && !model.startsWith('gpt-image')) {
+            setError('Reference images only work with the gpt-image models. Switch the model or remove the images.');
+            return;
+        }
 
-        const { job, error: createError } = await createGenerationJob({ prompt: finalPrompt, size, n, model });
+        submitBtn.disabled = true;
+        renderSkeletons(1);
+
+        let referenceImages = [];
+        try {
+            referenceImages = await Promise.all(
+                referenceFiles.map(async (file) => ({
+                    b64: await fileToBase64(file),
+                    mime: file.type || 'image/png',
+                })),
+            );
+        } catch {
+            submitBtn.disabled = false;
+            results.innerHTML = '';
+            setError('Could not read a reference image. Try removing and re-adding it.');
+            return;
+        }
+
+        const { job, error: createError } = await createGenerationJob({ prompt: finalPrompt, size, model, referenceImages });
         if (createError) {
             submitBtn.disabled = false;
             results.innerHTML = '';
