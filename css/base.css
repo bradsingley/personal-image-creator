@@ -194,7 +194,6 @@ a { color: inherit; }
   background: var(--pill-bg);
   border: 1px solid var(--pill-border);
   border-radius: var(--radius-pill);
-  padding: 7px 32px 7px 14px;
   font-size: 13px;
   color: var(--pill-fg);
   cursor: pointer;
@@ -220,10 +219,13 @@ a { color: inherit; }
   appearance: none;
   background: transparent;
   border: 0;
-  padding: 0;
+  /* Padding lives on the select (not the pill) so the whole pill area is part
+     of the select's hit box and any click opens the dropdown. */
+  padding: 7px 32px 7px 14px;
   font-size: 13px;
   color: var(--pill-fg);
   cursor: pointer;
+  width: 100%;
   min-width: 0;
 }
 
