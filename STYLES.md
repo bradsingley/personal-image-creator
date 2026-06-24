@@ -103,3 +103,27 @@ Use a flat off-white, cream, or light warm-gray background with heavy analog gra
 ### Composition & Mood
 Strong negative space, asymmetry, and intentional editorial hierarchy. Mood: nostalgic, analog, restrained, and quietly playful. Avoid glossy gradients, neon, drop shadows, 3D realism, busy clutter, and oversaturation.
 
+---
+
+## Flat tutorial
+
+A bold, flat vector illustration style in the spirit of a modern app tutorial or onboarding mascot (think learning-app character sets and friendly product mascots). Render an illustration of **[subject]** as a clean, approachable flat graphic.
+
+### Form & Shape
+- Build forms from simple, rounded geometric shapes with chunky, exaggerated proportions and smooth rounded corners.
+- Keep characters and objects approachable and expressive, with minimal facial features (simple dot eyes, clean smiles) and clear, playful poses.
+- When characters are shown, depict a diverse and inclusive cast.
+
+### Fills & Shading
+- Use clean solid color fills with no gradients and no realistic lighting.
+- Flat two-tone shading at most; crisp clean edges with minimal or no outlines.
+
+### Color
+Use a bright, cheerful, saturated palette—purples, pinks, greens, blues, reds, yellows, oranges—kept balanced and harmonious, never muddy.
+
+### Background & Mood
+- Place the subject on a clean flat background, either plain white or a single soft pastel color, with generous space and an optional soft flat drop-shadow ellipse beneath it.
+- No photographic texture, no grain, no 3D, no gradients, no busy detail.
+- Mood: friendly, energetic, clear, and welcoming.
+
+
