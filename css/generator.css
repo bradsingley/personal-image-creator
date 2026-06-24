@@ -180,6 +180,12 @@
   gap: 20px;
 }
 
+/* Generator: center the result(s) instead of filling the left track. */
+.generator .results {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 400px));
+  justify-content: center;
+}
+
 .result {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
