@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Image Creator · Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/generator.css" />
+    <link rel="stylesheet" href="css/library.css" />
+    <script src="js/theme.js" defer></script>
+    <script src="js/config.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/image-gen.js" defer></script>
+    <script src="js/library.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__left">
+        <a href="index.html" class="brand">PIC</a>
+        <nav class="tabs">
+          <a href="index.html" class="tab">Generator</a>
+          <a href="library.html" class="tab tab--active">Library</a>
+          <a href="styles.html" class="tab">Styles</a>
+        </nav>
+      </div>
+      <div class="site-header__right">
+        <div class="user-badge" id="userBadge" hidden></div>
+        <label class="theme-toggle">
+          <span>Dark mode</span>
+          <input type="checkbox" id="themeToggle" />
+          <span class="theme-toggle__track"><span class="theme-toggle__thumb"></span></span>
+        </label>
+      </div>
+    </header>
+
+    <main class="library-page">
+      <div class="library-page__head">
+        <h1 class="page-title">Library</h1>
+        <p class="page-subtitle">Every image you generate is saved here automatically.</p>
+      </div>
+
+      <p class="library-page__status" id="statusBanner" hidden></p>
+      <section class="results" id="library" aria-live="polite"></section>
+      <div class="library-page__empty" id="emptyState" hidden>
+        <p>No images yet.</p>
+        <a class="btn btn--primary" href="index.html">Generate your first image</a>
+      </div>
+    </main>
+  </body>
+</html>

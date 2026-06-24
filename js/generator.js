@@ -68,16 +68,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    function renderResults(images) {
+    function renderResults(urls) {
         results.innerHTML = '';
-        images.forEach((b64, i) => {
+        urls.forEach((url, i) => {
             const card = document.createElement('div');
             card.className = 'result';
 
             const img = document.createElement('img');
             img.className = 'result__img';
             img.alt = `Generated image ${i + 1}`;
-            img.src = `data:image/png;base64,${b64}`;
+            img.src = url;
 
             const actions = document.createElement('div');
             actions.className = 'result__actions';
@@ -86,11 +86,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             downloadBtn.type = 'button';
             downloadBtn.className = 'result__btn';
             downloadBtn.textContent = 'Download';
-            downloadBtn.addEventListener('click', () => {
-                const a = document.createElement('a');
-                a.href = img.src;
-                a.download = `pic-${Date.now()}-${i + 1}.png`;
-                a.click();
+            downloadBtn.addEventListener('click', async () => {
+                try {
+                    const blob = await (await fetch(url)).blob();
+                    const objUrl = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = objUrl;
+                    a.download = `pic-${Date.now()}-${i + 1}.png`;
+                    a.click();
+                    setTimeout(() => URL.revokeObjectURL(objUrl), 1000);
+                } catch {
+                    window.open(url, '_blank', 'noopener');
+                }
             });
 
             const copyBtn = document.createElement('button');
@@ -99,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             copyBtn.textContent = 'Copy';
             copyBtn.addEventListener('click', async () => {
                 try {
-                    const blob = await (await fetch(img.src)).blob();
+                    const blob = await (await fetch(url)).blob();
                     await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
                     copyBtn.textContent = 'Copied!';
                     copyBtn.classList.add('result__btn--copied');
@@ -143,19 +150,39 @@ document.addEventListener('DOMContentLoaded', async () => {
         submitBtn.disabled = true;
         renderSkeletons(n);
 
-        const { images, error } = await generateImages({ prompt: finalPrompt, size, n, model });
-        submitBtn.disabled = false;
-
-        if (error) {
+        const { job, error: createError } = await createGenerationJob({ prompt: finalPrompt, size, n, model });
+        if (createError) {
+            submitBtn.disabled = false;
             results.innerHTML = '';
-            if (error.status === 401) {
+            if (createError.status === 401) {
                 setError('Your session expired. Redirecting to sign-in…');
                 setTimeout(() => location.replace('login.html'), 1200);
             } else {
-                setError(error.message || 'Generation failed.');
+                setError(createError.message || 'Generation failed.');
             }
             return;
         }
-        renderResults(images);
+
+        const { job: finished, error: pollError } = await pollJob(job.id);
+        submitBtn.disabled = false;
+
+        if (pollError) {
+            results.innerHTML = '';
+            if (pollError.status === 401) {
+                setError('Your session expired. Redirecting to sign-in…');
+                setTimeout(() => location.replace('login.html'), 1200);
+            } else {
+                setError(pollError.message || 'Generation failed.');
+            }
+            return;
+        }
+
+        if (!finished || finished.status === 'failed') {
+            results.innerHTML = '';
+            setError(finished?.error || 'Generation failed.');
+            return;
+        }
+
+        renderResults(finished.imageUrls || []);
     });
 });
