@@ -78,3 +78,28 @@ Add subtle paper grain. No gloss, no shine, no heavy texture.
 Refined, minimal, conceptual, editorial, calm.
 
 Do NOT include clutter, drop shadows, torn edges, thick outlines, decorative graphics, harsh lighting, busy layouts, oversaturation, text/words.
+
+---
+
+## Retro print
+
+A nostalgic, analog print aesthetic in the spirit of mid-century risograph and newsprint halftone. Render an illustration of **[subject]** as if pulled from a vintage instruction manual, an old software interface, or a printed poster.
+
+### Surface & Texture
+Use a flat off-white, cream, or light warm-gray background with heavy analog grain and stippled, engraved, or dotted halftone texture. The whole image should read as a printed page, not a glossy render.
+
+### Elements
+- Render the subject as monochrome grayscale photographic cut-outs and fine stipple/engraving illustrations with clean masked edges.
+- Lean into retro motifs and framing—old hardware, classic UIs, printed cards, mechanical objects—without literal logos or branding.
+
+### Color
+- Apply exactly **one** saturated retro accent color (e.g. a single classic red, warm orange, or muted vintage green).
+- Use it sparingly: one small element, a thin line, a border, or a single color-blocked shape, so it pops against the muted grayscale.
+
+### Line-work & Type
+- Add thin, hand-drawn ink line-work: wavy connectors, looping flourishes, or small scribbles (no arrows), subtle and secondary.
+- Optional minimal vintage typographic labels in a clean monospace or grotesque typeface may appear sparingly as part of the layout.
+
+### Composition & Mood
+Strong negative space, asymmetry, and intentional editorial hierarchy. Mood: nostalgic, analog, restrained, and quietly playful. Avoid glossy gradients, neon, drop shadows, 3D realism, busy clutter, and oversaturation.
+
