@@ -55,6 +55,25 @@ button, input, select, textarea {
 
 a { color: inherit; }
 
+/* ---------- Shared page title ---------- */
+
+.hero-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(38px, 5.6vw, 67px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin: 0;
+}
+
+.page-subtitle {
+  margin: 10px 0 0;
+  color: var(--fg-muted);
+  font-size: 14px;
+  text-align: center;
+}
+
 /* ---------- Header ---------- */
 
 .site-header {
