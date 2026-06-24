@@ -1,40 +1,16 @@
 {
   "styles": [
     {
-      "id": "illustration",
-      "name": "Illustration",
-      "description": "Clean modern editorial illustration.",
-      "promptSuffix": ", as a clean modern editorial illustration with flat colors, simple shapes, and confident linework on an off-white background"
+      "id": "neutral-collage",
+      "name": "Neutral collage",
+      "description": "Quiet conceptual editorial collage: grayscale hero cutout, one accent color.",
+      "promptSuffix": ". Render this as a conceptual editorial collage illustration about the subject above, with a restrained, contemporary aesthetic. Style & composition: a neutral-toned flat background (soft gray, desaturated beige, or muted off-white) with subtle grain texture reminiscent of risograph or analog print; avoid tonal bias, especially yellow or blue. Feature one hero photographic cutout in grayscale, supported by one or two smaller photographic or silhouetted cutouts that subtly set the scene or mood (atmospheric, not literal). Prioritize negative space, asymmetry, and off-grid placement to evoke tension, imbalance, or editorial hierarchy; avoid static centering or decorative symmetry. Symbolic line-work: minimal, hand-drawn micro-line details that interact meaningfully with the subject, suggesting direction or flow, collaboration (intertwined, crossed-out, looped around), friction or tension, or abstract conceptual cues (imbalance, pressure, silence); no decorative scribbles or ornamental marks. Color: choose a single accent color from the subject's thematic meaning (color psychology), applied in exactly one way, either an overlaid color-wipe on one element, the color of the line-work, or one supporting storytelling color detail; keep it editorial, not expressive. Focus on symbolic abstraction over direct representation; no logos, branding, or literal iconography; do not show people, body parts, or silhouettes unless fully abstracted. Avoid vector styles, geometric overlays, dramatized emotion, and decorative elements that do not serve the metaphor. Overall tone: visually quiet, conceptually sharp, editorially neutral, evoking inquiry rather than answers. No text or words."
     },
     {
-      "id": "watercolor",
-      "name": "Watercolor",
-      "description": "Loose hand-painted watercolor.",
-      "promptSuffix": ", as a loose hand-painted watercolor with soft edges, gentle color bleeds, and visible paper texture"
-    },
-    {
-      "id": "line-drawing",
-      "name": "Line drawing",
-      "description": "Minimal single-weight ink line art.",
-      "promptSuffix": ", as a minimal single-weight black ink line drawing on plain white paper, no shading, generous negative space"
-    },
-    {
-      "id": "photographic",
-      "name": "Photographic",
-      "description": "Realistic studio photography.",
-      "promptSuffix": ", photographed in soft natural light with a 50mm lens, shallow depth of field, realistic textures, neutral color grade"
-    },
-    {
-      "id": "risograph",
-      "name": "Risograph",
-      "description": "Two-color riso print look.",
-      "promptSuffix": ", printed as a two-color risograph with slight registration misalignment, halftone grain, and limited palette of warm red and navy on cream paper"
-    },
-    {
-      "id": "3d-render",
-      "name": "3D render",
-      "description": "Clay-style 3D render.",
-      "promptSuffix": ", as a clay-style 3D render with soft global illumination, matte surfaces, pastel palette, and gentle ambient occlusion"
+      "id": "editorial-collage",
+      "name": "Editorial collage",
+      "description": "Warm, minimal editorial collage on oat with a soft 3–5 color palette.",
+      "promptSuffix": ". Render this as a refined editorial collage about the subject above. Visual construction: 3 to 8 elements maximum; crisp photographic cut-outs with clean masked edges (no torn edges), shot on a film camera, black-and-white or color; arranged asymmetrically with strong hierarchy and large negative space; intentional and designed, never busy or decorative; when people are depicted, prioritize diversity. Graphic details: very minimal fine marks only, such as thin line or diagram connectors (no arrows) and small scribbles, kept subtle and secondary. Color: a warm, human-centered palette of 3 to 5 colors total on a bright off-white oat background; allowed tones include sage, moss, eucalyptus, oat, sand, almond, parchment, clay, powder blue, faded sky, dusty teal, apricot, soft coral, terracotta, marigold, cocoa, graphite; colors softly lit and naturally balanced. Strict exclusions: no neon, no pure primaries, no pure black, no strong color contrast, no vector graphics or iconography (squares, triangles, circles). Surface: subtle paper grain, no gloss, no shine, no heavy texture. Mood: refined, minimal, conceptual, editorial, calm. Do not include clutter, drop shadows, torn edges, thick outlines, decorative graphics, harsh lighting, busy layouts, oversaturation, or text/words."
     }
   ]
 }
