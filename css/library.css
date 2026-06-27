@@ -25,6 +25,8 @@
   gap: 18px;
 }
 
+.library-page__empty[hidden] { display: none; }
+
 .library-page__empty p {
   margin: 0;
   font-size: 16px;
